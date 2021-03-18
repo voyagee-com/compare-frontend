@@ -1,38 +1,49 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react"
 import styled from "styled-components";
-import { CompareContextProvider } from "./contexts/CompareContext";
-
+// import { CompareContextProvider } from "./contexts/CompareContext";
+import Tabs from './components/Tabs'
 import Flights from "./containers/Flights";
 import TotalValue from "./components/TotalValue";
 
 export const Compare = styled.div`
   display: grid;
-  grid-template-rows: 70vh 10%;
+  /* grid-template-rows: 2vh 35vh 35vh 20vh; */
+  grid-template-rows: 2vh 10vh 10vh 5vh;
   margin: 16px;
 `;
+// let compareArr = []
 
 export default function Root(props) {
-  const [providerValue, setProviderValue] = useState([]);
-  const [hasFlight, setHasFlight] = useState(false);
 
-  useEffect(() => {
-    window.addEventListener("flightOffer", (event) => {
-      setProviderValue(event.detail);
-    });
-    // setProviderValue(mockFlights)
-    setHasFlight(true);
-  }, []);
+  const [ newCompare, setNewCompare ] = useState([]);
+  const [ flightProviderValue, setFlightProviderValue ] = useState([]);
+
+  window.addEventListener("flightOffer", (event) => {
+    // console.log('0', compareArr);
+
+    // if(!compareArr.length) {
+    //   console.log('cai aqii');
+
+    //   const insertNewCompare = {
+    //     id: newCompare.length +1
+    //   }
+
+    //   // compareArr.push(insertNewCompare)
+    //   compareArr = [...compareArr, insertNewCompare]
+    //   console.log(compareArr);
+
+    //   setNewCompare(compareArr)
+    // }
+
+  });
 
   return (
-    <CompareContextProvider value={providerValue}>
-      <Compare>
-        {hasFlight && (
-          <div>
-            <Flights />
-          </div>
-        )}
-        <TotalValue />
-      </Compare>
+    <CompareContextProvider
+      value={newCompare}
+      flightValues={flightProviderValue}
+    >
+      <Tabs tabs={[]} />
     </CompareContextProvider>
-  );
+    );
+
 }

@@ -2,7 +2,7 @@ import React, { createContext } from "react";
 
 export const CompareContext = createContext({});
 
-export const CompareContextProvider = ({ children, value }) => {
+export const CompareContextProvider = ({ children, value, flightValues }) => {
   let flightValue = {
     departure: {},
     arrival: {},
@@ -47,7 +47,9 @@ export const CompareContextProvider = ({ children, value }) => {
       itineraries,
       price: { grandTotal },
     } = value;
+
     const [start, finish] = itineraries;
+
     flightValue = {
       departure: steps(start),
       arrival: steps(finish),
@@ -69,12 +71,15 @@ export const CompareContextProvider = ({ children, value }) => {
     }
   };
 
-  if (value.length !== 0) {
-    const { type } = value[0];
-    checkType(type, value[0]);
+  if (value) {
+    console.log('value de context', value);
+    // const { type } = value[0];
+    // checkType(type, value[0]);
   }
 
   const CompareContextValue = {
+    // compare: [{}]
+    compareId: 10,
     flights: flightValue,
     hotels: hotelValue,
     combinedValue: combinedValue,

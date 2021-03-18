@@ -41,6 +41,11 @@ const qtdStops = (stops) => {
 const Flights = () => {
   const { flights } = useContext(CompareContext);
   const { arrival, departure, grandTotal } = flights;
+  console.log('tt', departure);
+
+  if (!departure) {
+    return
+  }
 
   return (
     <StyledFlight>

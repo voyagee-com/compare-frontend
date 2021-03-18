@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { CompareContext } from "../../contexts/CompareContext";
+// import { CompareContext } from "../../contexts/CompareContext";
 
 import { Subtotal } from "../../containers/Flights/Flights.style";
 
@@ -21,13 +21,13 @@ export const Button = styled.button`
 `;
 
 const TotalValue = () => {
-  const { combinedValue } = useContext(CompareContext);
-  const { total } = combinedValue;
+  // const { combinedValue } = useContext(CompareContext);
+  // const { total } = combinedValue;
   return (
     <StyledTotalValue>
       <Subtotal>
         <h4>Total</h4>
-        <span>{total}</span>
+        <span>total</span>
       </Subtotal>
       <Button>Go to checkout</Button>
     </StyledTotalValue>
