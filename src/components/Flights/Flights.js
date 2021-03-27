@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import { CompareContext } from "../../contexts/CompareContext";
 import { StyledFlight, Segments, Subtotal } from "./Flights.style";
 
 const toCurrency = (number) => {
@@ -39,14 +38,6 @@ const qtdStops = (stops) => {
 };
 
 const Flights = () => {
-  const { flights } = useContext(CompareContext);
-  const { arrival, departure, grandTotal } = flights;
-  console.log('tt', departure);
-
-  if (!departure) {
-    return
-  }
-
   return (
     <StyledFlight>
       <section>

@@ -1,9 +1,8 @@
 import React, { useState } from "react"
+// import { StoreProvider } from 'react-context-global-store'
+// import { Store } from './store'
+// import Tabs from './components/Tabs'
 import styled from "styled-components";
-// import { CompareContextProvider } from "./contexts/CompareContext";
-import Tabs from './components/Tabs'
-import Flights from "./containers/Flights";
-import TotalValue from "./components/TotalValue";
 
 export const Compare = styled.div`
   display: grid;
@@ -11,39 +10,22 @@ export const Compare = styled.div`
   grid-template-rows: 2vh 10vh 10vh 5vh;
   margin: 16px;
 `;
-// let compareArr = []
+
 
 export default function Root(props) {
 
   const [ newCompare, setNewCompare ] = useState([]);
-  const [ flightProviderValue, setFlightProviderValue ] = useState([]);
+  // const [ flightProviderValue, setFlightProviderValue ] = useState([]);
 
   window.addEventListener("flightOffer", (event) => {
-    // console.log('0', compareArr);
-
-    // if(!compareArr.length) {
-    //   console.log('cai aqii');
-
-    //   const insertNewCompare = {
-    //     id: newCompare.length +1
-    //   }
-
-    //   // compareArr.push(insertNewCompare)
-    //   compareArr = [...compareArr, insertNewCompare]
-    //   console.log(compareArr);
-
-    //   setNewCompare(compareArr)
-    // }
-
+    setNewCompare(event.detail[0])
   });
 
   return (
-    <CompareContextProvider
-      value={newCompare}
-      flightValues={flightProviderValue}
-    >
-      <Tabs tabs={[]} />
-    </CompareContextProvider>
+    <div>Compare</div>
+    // <StoreProvider store={Store}>
+    //   <Tabs tabs={newCompare} />
+    // </StoreProvider>
     );
 
 }
