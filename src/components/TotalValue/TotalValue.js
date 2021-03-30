@@ -2,6 +2,13 @@ import React from "react";
 import styled from "styled-components";
 import { Subtotal } from '../Flights/Flights.style'
 
+const toCurrency = (number) => {
+  const options = { style: "currency", currency: "USD" };
+  const convertedCurrency = new Intl.NumberFormat("en-US", options).format(
+    number
+  );
+  return convertedCurrency;
+};
 export const StyledTotalValue = styled.div``;
 
 export const Button = styled.button`
@@ -19,13 +26,13 @@ export const Button = styled.button`
 `;
 
 const TotalValue = ({item}) => {
-
+  console.log(item);
   const { combinedValue } = item[0]
   return (
     <StyledTotalValue>
       <Subtotal>
         <h4>Total</h4>
-        <span>{combinedValue}</span>
+        <span>{toCurrency(combinedValue)}</span>
       </Subtotal>
       <Button>Go to checkout</Button>
     </StyledTotalValue>

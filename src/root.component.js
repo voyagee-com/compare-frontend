@@ -1,8 +1,7 @@
-import React, { useState } from "react"
-// import { StoreProvider } from 'react-context-global-store'
-// import { Store } from './store'
-// import Tabs from './components/Tabs'
-import styled from "styled-components";
+import React, { useEffect } from 'react'
+import { useCounter, CounterSubscriber } from './store/index'
+import Tabs from './components/Tabs'
+import styled from 'styled-components'
 
 export const Compare = styled.div`
   display: grid;
@@ -11,21 +10,19 @@ export const Compare = styled.div`
   margin: 16px;
 `;
 
-
 export default function Root(props) {
+  const [state, actions] = useCounter()
 
-  const [ newCompare, setNewCompare ] = useState([]);
-  // const [ flightProviderValue, setFlightProviderValue ] = useState([]);
+  // console.log(actions);
 
   window.addEventListener("flightOffer", (event) => {
-    setNewCompare(event.detail[0])
+    console.log('flightOffer');
+    // actions.reset()
+    actions.toFlight(event.detail[0])
   });
 
   return (
-    <div>Compare</div>
-    // <StoreProvider store={Store}>
-    //   <Tabs tabs={newCompare} />
-    // </StoreProvider>
-    );
+    <Tabs />
+  );
 
 }

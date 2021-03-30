@@ -1,13 +1,5 @@
-import React, { useContext } from "react";
-import { StyledFlight, Segments, Subtotal } from "./Flights.style";
-
-const toCurrency = (number) => {
-  const options = { style: "currency", currency: "USD" };
-  const convertedCurrency = new Intl.NumberFormat("en-US", options).format(
-    number
-  );
-  return convertedCurrency;
-};
+import React from 'react'
+import { StyledFlight, Segments, Subtotal } from './Flights.style'
 
 const toHourDisplay = (datetime) => {
   const options = { hour: "2-digit", minute: "2-digit", timeZone: "UTC" };
@@ -37,7 +29,25 @@ const qtdStops = (stops) => {
   return toStops;
 };
 
-const Flights = () => {
+const steps = (segment) => {
+  const { segments } = segment;
+  const { length, 0: firstStep, [length - 1]: lastStep } = segments;
+  const internalSegment = {
+    departure: firstStep.departure,
+    carrierCode: firstStep.carrierCode,
+    arrival: lastStep.arrival,
+    carrierCode: lastStep.carrierCode,
+    stops: length - 1,
+  };
+  return internalSegment;
+};
+
+const Flights = ({ item }) => {
+  const { itineraries } = item[0].flight.value
+  const [start, finish] = itineraries
+  const departure  = steps(start)
+  const arrival = steps(finish)
+
   return (
     <StyledFlight>
       <section>
@@ -86,10 +96,6 @@ const Flights = () => {
           </div>
         </Segments>
       </section>
-      <Subtotal>
-        <h4>Subtotal</h4>
-        <span>{toCurrency(grandTotal)}</span>
-      </Subtotal>
     </StyledFlight>
   );
 };

@@ -46,6 +46,7 @@
     "react": "^16.12.0",
     "react-context-global-store": "^1.1.0",
     "react-dom": "^16.12.0",
+    "react-sweet-state": "^2.5.2",
     "styled-components": "^5.2.1"
   }
 }
