@@ -1,22 +1,20 @@
 import styled from "styled-components";
 
-export const StyledFlight = styled.article`
-  display: grid;
-  grid-template-rows: 90%;
-  grid-gap: 16px;
+export const StyledFlight = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-bottom: 1px dashed var(--brand04);
 
   & section:first-child {
     border-bottom: 1px solid var(--base);
   }
-  /* & section:last-child {
-    padding-top: 12px;
-  } */
 
-  & section {
-    display: grid;
-    grid-template-columns: 20% 65%;
+  & > section {
+    display: grid !important;
+    grid-template-columns: 20% 70%;
     grid-column-gap: 5%;
-    padding-bottom: 12px;
+    padding: 22px 0;
 
     & h3 {
       font-size: 12px;

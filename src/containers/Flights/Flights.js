@@ -1,5 +1,14 @@
 import React from 'react'
+import EmptyCard from '../../components/EmptyCard'
 import { StyledFlight, Segments, Subtotal } from './Flights.style'
+
+const toCurrency = (number) => {
+  const options = { style: "currency", currency: "USD" };
+  const convertedCurrency = new Intl.NumberFormat("en-US", options).format(
+    number
+  );
+  return convertedCurrency;
+};
 
 const toHourDisplay = (datetime) => {
   const options = { hour: "2-digit", minute: "2-digit", timeZone: "UTC" };
@@ -43,7 +52,16 @@ const steps = (segment) => {
 };
 
 const Flights = ({ item }) => {
-  const { itineraries } = item[0].flight.value
+
+  if (!Object.entries(item).length) {
+    return (
+      <EmptyCard
+        productTitle="Flight"
+        productMessage="Add a Flight to find the best choice for your trip"
+      />
+    )
+  }
+  const { itineraries, price: { grandTotal } } = item.value
   const [start, finish] = itineraries
   const departure  = steps(start)
   const arrival = steps(finish)
@@ -96,6 +114,10 @@ const Flights = ({ item }) => {
           </div>
         </Segments>
       </section>
+      <Subtotal>
+        <h4>Subtotal</h4>
+        <span>{toCurrency(grandTotal)}</span>
+      </Subtotal>
     </StyledFlight>
   );
 };

@@ -48,12 +48,8 @@ const Tabs = () => {
 
 
   const [state, actions] = useCounter()
-
-
-  // const { compareItems } = props.store.compare
   const { compareItems } = state
-  console.log(compareItems);
-  // const { tabs } = props
+
 
   let initialItem = {
     id: 0,
@@ -108,12 +104,13 @@ const Tabs = () => {
   //   default:
   // }
 
+  // Dont use
   // const Panel = tabs && tabs.find((tab) => tab.index === selectedTab);
   // const Panel = tabsz && tabsz.find((tab) => tab.index === selectedTab);
 
   const [ selectedTab, setSelectedTab ] = useState(compareItems.length +1);
   const Panel = compareItems && compareItems.find((tab) => tab.id === selectedTab);
-  // console.log(Panel);
+
 
   return (
 
@@ -143,6 +140,7 @@ const Tabs = () => {
       >
         {Panel && <>
           <Flights item={compareItems}/>
+          <div>Hotels</div>
           <TotalValue item={compareItems} />
         </>}
         </div>

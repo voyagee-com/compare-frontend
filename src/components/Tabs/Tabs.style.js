@@ -39,6 +39,7 @@ export const StyledTabs = styled.div`
   text-align: left;
   padding: 1rem;
   background-color: #f8f8f8;
+  /* background-color: blue; */
   box-shadow: 1px 1px 2px rgb(204 204 204 / 75%);
 }
 
