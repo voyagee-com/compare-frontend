@@ -1,6 +1,8 @@
 import React from 'react'
+import { toCurrency, toHourDisplay, toDateDisplay } from '../../utils'
 import EmptyCard from '../../components/EmptyCard'
-import { StyledHotel } from './Hotels.style'
+import Rating from '../../components/Rating'
+import { StyledHotel, CheckingDate, TotalGuests, Subtotal } from './Hotels.style'
 
 const hhh = {
   "type": "hotel-offers",
@@ -166,29 +168,26 @@ const Hotels = ({ item }) => {
   console.log(checkInDate, checkOutDate);
   return (
     <StyledHotel>
-
-      <h1>{name}</h1>
+      <h1 className="title">{name}</h1>
       <div>
-      {rating}
-        <span>&#9733;</span>
-        <span>&#9733;</span>
-        <span>&#9733;</span>
-        <span>&#9733;</span>
-        <span>&#9733;</span>
+      <Rating rateNumber={rating} />
       </div>
-      <div>Total guests: {guests.adults}</div>
+      <TotalGuests>Total guests: <strong>{guests.adults}</strong></TotalGuests>
+      <CheckingDate>
+        <p>Check-in
+         <time dateTime={checkInDate}>{toDateDisplay(checkInDate)}</time>
+        </p>
+        <p>Check-out
+         <time dateTime={checkOutDate}>{toDateDisplay(checkOutDate)}</time>
+        </p>
+      </CheckingDate>
       <div>
-        Check-in
-        {checkInDate}
+        <p>Bads {room.typeEstimated.beds}x {room.typeEstimated.bedType}</p>
       </div>
-      <div>
-        Check-out
-        {checkOutDate}
-      </div>
-      <div>
-      bads {room.typeEstimated.beds}x {room.typeEstimated.bedType}
-      </div>
-      <div>{total}</div>
+      <Subtotal>
+        <h4>Subtotal</h4>
+        <span>{toCurrency(total)}</span>
+      </Subtotal>
     </StyledHotel>
   )
 }
