@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
-import { useCounter, CounterSubscriber } from './store/index'
-// import Tabs from './components/Tabs'
+import { useCounter } from './store/index'
 import Flights from './containers/Flights'
 import Hotels from './containers/Hotels'
 import TotalValue from './containers/TotalValue'
@@ -8,7 +7,6 @@ import styled from 'styled-components'
 
 export const Compare = styled.div`
   display: grid;
-  /* grid-template-rows: 2vh 27vh 27vh 27vh; */
   grid-template-rows: 26vh 26vh 15vh;
   width: 320px;
   padding: 16px;
@@ -95,7 +93,6 @@ export default function Root(props) {
           <label for={`option${id}`}>{label}</label>
           <article>
             <Compare>
-              {/*<button>lixo</button>*/}
               <Flights item={flight}/>
               <Hotels item={hotel}/>
               <TotalValue combinedValue={combinedValue} />
