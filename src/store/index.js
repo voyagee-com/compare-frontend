@@ -1,9 +1,26 @@
 import { createStore, createSubscriber, createHook } from 'react-sweet-state'
 
-const setCombinedValue = (flight) => {
-  const { grandTotal } = flight.price
-  return parseFloat(grandTotal)
+const setCombinedValue = (oldValue, newValue) => {
+  let combinedValue = oldValue + newValue
+  return combinedValue
 }
+
+const getValue = (product) => {
+  const { type } = product
+  let productValue = 0
+  switch(type) {
+    case 'hotel-offers':
+      productValue = parseFloat(product.offers[0].price.total)
+      break
+      case 'flight-offer':
+        productValue = parseFloat(product.price.grandTotal)
+      break
+    default: productValue
+  }
+
+  return productValue
+}
+
 
 const Store = createStore({
   initialState: {
@@ -11,20 +28,66 @@ const Store = createStore({
   },
 
   actions: {
+
     toFlight: (value) => ({ setState, getState }) => {
 
-      const internalFlight = {
-        label: `Compare ${getState().compareItems.length +1}`,
-        id: getState().compareItems.length +1,
-        flight: { value },
-        hotel: {},
-        combinedValue: setCombinedValue(value)
+      // if(getState().compareItems.flight === undefined) {
+      //   setState({ compareItems: [...getState().compareItems, getState().compareItems[0].flight = {value}]})
+      //   return
+      // }
+      if (getState().compareItems.length === 0) {
+        const internalFlight = {
+          label: `Compare ${getState().compareItems.length +1}`,
+          id: getState().compareItems.length +1,
+          flight: { value },
+          hotel: null,
+          combinedValue: getValue(value)
+        }
+
+        return setState({ compareItems: [...getState().compareItems, internalFlight]})
       }
 
-      setState({ compareItems: [...getState().compareItems, internalFlight]})
+      if(
+        getState().compareItems[getState().compareItems.length -1].hotel &&
+        getState().compareItems[getState().compareItems.length -1].flight === null
+      ){
+        console.log('entrou no flights');
+        const internal = getState().compareItems[getState().compareItems.length -1].flight = { value }
+        const currentTotalValue =  getState().compareItems[getState().compareItems.length -1].combinedValue;
+        const productValue = getValue(value)
+        const internalValue = getState().compareItems[getState().compareItems.length -1].combinedValue = setCombinedValue(currentTotalValue, productValue)
+        setState({ compareItems: [getState().compareItems[getState().compareItems.length -1]] })
+      }
 
     },
-    toHotels: () => ({ setState }),
+    toHotels: (value) => ({ setState, getState }) => {
+      // console.log('ele cai mo hotels', value);
+
+      if (getState().compareItems.length === 0) {
+        const internalHotel = {
+          label: `Compare ${getState().compareItems.length +1}`,
+          id: getState().compareItems.length +1,
+          flight: null,
+          hotel: { value },
+          combinedValue: getValue(value)
+        }
+        return setState({ compareItems: [...getState().compareItems, internalHotel] })
+      }
+
+      if(
+        getState().compareItems[getState().compareItems.length -1].flight &&
+        getState().compareItems[getState().compareItems.length -1].hotel === null
+      ){
+        // console.log('entrou');
+        const internal = getState().compareItems[getState().compareItems.length -1].hotel = { value }
+        const currentTotalValue =  getState().compareItems[getState().compareItems.length -1].combinedValue;
+        const productValue = getValue(value)
+        const internalValue = getState().compareItems[getState().compareItems.length -1].combinedValue = setCombinedValue(currentTotalValue, productValue)
+
+        setState({ compareItems: [getState().compareItems[getState().compareItems.length -1]] })
+      }
+
+    },
     reset: () => ({ setState }) => {
       setState({ compareItems: [] })
     }

@@ -9,7 +9,7 @@ import styled from 'styled-components'
 export const Compare = styled.div`
   display: grid;
   /* grid-template-rows: 2vh 27vh 27vh 27vh; */
-  grid-template-rows: 26vh 26vh 25vh;
+  grid-template-rows: 26vh 26vh 15vh;
   width: 320px;
   padding: 16px;
   background-color: var(--lightest);
@@ -72,17 +72,24 @@ export const Tab = styled.div`
 export default function Root(props) {
   const [state, actions] = useCounter()
 
-  console.log(actions);
-  console.log(state);
+  // console.log(actions);
+  console.log('root', state);
   const { compareItems } = state
 
   useEffect(() => {
-    window.addEventListener("flightOffer", (event) => {
+    window.addEventListener("@voyage-flight-app-flightOffer", (event) => {
       console.log('flightOffer');
-      // actions.reset()
       actions.toFlight(event.detail[0])
     });
   }, [])
+
+  useEffect(() => {
+    window.addEventListener("@voyage-hotel-app-hotelOffer", (event) => {
+      console.log('hotelOffer');
+      actions.toHotels(event.detail[0])
+    });
+  }, [])
+
 
   return (
     <Tab>
@@ -102,15 +109,4 @@ export default function Root(props) {
       ))}
     </Tab>
   );
-
 }
-
-// combinedValue: 444.39
-// ​​​
-// flight: Object { value: {…} }
-// ​​​
-// hotel: Object {  }
-// ​​​
-// id: 6
-// ​​​
-// label: "Compare 6"

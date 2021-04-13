@@ -1,6 +1,5 @@
 import React from 'react'
-import { StyledTotalValue, Button } from './TotalValue.style'
-import { Subtotal } from '../Flights/Flights.style'
+import { StyledTotalValue, Button, Subtotal } from './TotalValue.style'
 
 const toCurrency = (number) => {
   const options = { style: "currency", currency: "USD" };
@@ -11,14 +10,13 @@ const toCurrency = (number) => {
 };
 
 const TotalValue = ({ combinedValue }) => {
-  // console.log(combinedValue);
+  // console.log('combinedValue', combinedValue);
   // const { combinedValue } = item[0]
   return (
     <StyledTotalValue>
       <Subtotal>
-        <h4>Total</h4>
-        <span>{/*toCurrency(combinedValue)*/}</span>
-        <span>{combinedValue}</span>
+        <h4>Total </h4>
+        <span>{toCurrency(combinedValue)}</span>
       </Subtotal>
       <Button>Go to checkout</Button>
     </StyledTotalValue>

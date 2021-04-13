@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const StyledRating = styled.div`
   & span {
+    font-size: 20px;
     color: var(--text-base);
   }
 

@@ -27,8 +27,8 @@ const steps = (segment) => {
 };
 
 const Flights = ({ item }) => {
-
-  if (!Object.entries(item).length) {
+  // console.log('item Flight', item);
+  if (!item || !Object.entries(item).length) {
     return (
       <EmptyCard
         productTitle="Flight"
@@ -90,7 +90,7 @@ const Flights = ({ item }) => {
         </Segments>
       </section>
       <Subtotal>
-        <h4>Subtotal</h4>
+        <h4>Total flight</h4>
         <span>{toCurrency(grandTotal)}</span>
       </Subtotal>
     </StyledFlight>

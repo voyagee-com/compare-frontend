@@ -27,7 +27,10 @@ export const StyledFlight = styled.div`
   }
 `;
 
-export const Subtotal = styled.section`
+export const Subtotal = styled.div`
+  display: grid;
+  grid-template-columns: 30% 66%;
+  grid-column-gap: 0%;
   align-items: flex-end;
   & span {
     position: relative;
