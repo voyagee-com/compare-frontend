@@ -51,7 +51,6 @@ const Store = createStore({
         getState().compareItems[getState().compareItems.length -1].hotel &&
         getState().compareItems[getState().compareItems.length -1].flight === null
       ){
-        console.log('entrou no flights');
         const internal = getState().compareItems[getState().compareItems.length -1].flight = { value }
         const currentTotalValue =  getState().compareItems[getState().compareItems.length -1].combinedValue;
         const productValue = getValue(value)
@@ -61,7 +60,6 @@ const Store = createStore({
 
     },
     toHotels: (value) => ({ setState, getState }) => {
-      // console.log('ele cai mo hotels', value);
 
       if (getState().compareItems.length === 0) {
         const internalHotel = {
@@ -78,7 +76,7 @@ const Store = createStore({
         getState().compareItems[getState().compareItems.length -1].flight &&
         getState().compareItems[getState().compareItems.length -1].hotel === null
       ){
-        // console.log('entrou');
+
         const internal = getState().compareItems[getState().compareItems.length -1].hotel = { value }
         const currentTotalValue =  getState().compareItems[getState().compareItems.length -1].combinedValue;
         const productValue = getValue(value)

@@ -27,7 +27,6 @@ const steps = (segment) => {
 };
 
 const Flights = ({ item }) => {
-  // console.log('item Flight', item);
   if (!item || !Object.entries(item).length) {
     return (
       <EmptyCard

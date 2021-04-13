@@ -72,20 +72,16 @@ export const Tab = styled.div`
 export default function Root(props) {
   const [state, actions] = useCounter()
 
-  // console.log(actions);
-  console.log('root', state);
   const { compareItems } = state
 
   useEffect(() => {
     window.addEventListener("@voyage-flight-app-flightOffer", (event) => {
-      console.log('flightOffer');
       actions.toFlight(event.detail[0])
     });
   }, [])
 
   useEffect(() => {
     window.addEventListener("@voyage-hotel-app-hotelOffer", (event) => {
-      console.log('hotelOffer');
       actions.toHotels(event.detail[0])
     });
   }, [])

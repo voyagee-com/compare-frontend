@@ -10,8 +10,6 @@ const toCurrency = (number) => {
 };
 
 const TotalValue = ({ combinedValue }) => {
-  // console.log('combinedValue', combinedValue);
-  // const { combinedValue } = item[0]
   return (
     <StyledTotalValue>
       <Subtotal>

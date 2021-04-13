@@ -5,7 +5,6 @@ import Rating from '../../components/Rating'
 import { StyledHotel, CheckingDate, Accomodation, TotalGuests, Subtotal } from './Hotels.style'
 
 const Hotels = ({ item }) => {
-  // console.log('item hotel', item);
 
   if (!item || !Object.entries(item).length) {
     return (
